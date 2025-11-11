@@ -7,14 +7,9 @@
             $('#mobile-menu').toggleClass('hidden');
         });
 
-        // Search Overlay Toggle
-        $('#search-icon').on('click', function(e) {
-            e.preventDefault();
-            $('#search-overlay').toggleClass('hidden flex');
-        });
-
-        $('#close-search').on('click', function() {
-            $('#search-overlay').toggleClass('hidden flex');
+        // Mobile Search Toggle
+        $('#mobile-search-button').on('click', function() {
+            $('#mobile-search-bar').toggleClass('hidden');
         });
 
         // Update cart count via AJAX

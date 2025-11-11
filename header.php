@@ -31,7 +31,10 @@
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <div class="md:hidden">
+                <div class="md:hidden flex items-center space-x-6">
+                    <button id="mobile-search-button" class="text-gray-600 hover:text-primary focus:outline-none">
+                        <i class="fas fa-search text-lg"></i>
+                    </button>
                     <button id="mobile-menu-button" class="text-gray-600 hover:text-primary focus:outline-none">
                         <i class="fas fa-bars text-lg"></i>
                     </button>
@@ -54,15 +57,16 @@
                 </nav>
 
                 <!-- Navigation Icons -->
-                <div class="hidden md:flex items-center space-x-6">
-                    
+                <div class="hidden md:flex items-center space-x-4">
                     <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="text-gray-600 hover:text-primary transition-colors relative">
                         <i class="fas fa-shopping-cart text-lg"></i>
                         <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
                     </a>
-                    <a href="<?php echo esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>" class="text-gray-600 hover:text-primary transition-colors">
-                        <i class="fas fa-user text-lg"></i>
-                    </a>
+                    <?php if ( ! is_user_logged_in() ) : ?>
+                        <a href="<?php echo esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>" class="text-gray-600 hover:text-primary transition-colors">
+                            <i class="fas fa-user text-lg"></i>
+                        </a>
+                    <?php endif; ?>
                     <?php if ( is_user_logged_in() ) : ?>
                         <?php $current_user = wp_get_current_user(); ?>
                         <div class="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-semibold text-sm">
@@ -72,6 +76,10 @@
                         </div>
                     <?php endif; ?>
                 </div>
+            </div>
+            <!-- Search Bar (Mobile) -->
+            <div id="mobile-search-bar" class="py-2 md:hidden hidden">
+                <?php get_search_form(); ?>
             </div>
         </div>
     </header>
@@ -86,6 +94,26 @@
                 )
             );
             ?>
+            <!-- Navigation Icons -->
+            <div class="flex items-center space-x-4 mt-4">
+                <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="text-gray-600 hover:text-primary transition-colors relative">
+                    <i class="fas fa-shopping-cart text-lg"></i>
+                    <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
+                </a>
+                <?php if ( ! is_user_logged_in() ) : ?>
+                    <a href="<?php echo esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>" class="text-gray-600 hover:text-primary transition-colors">
+                        <i class="fas fa-user text-lg"></i>
+                    </a>
+                <?php endif; ?>
+                <?php if ( is_user_logged_in() ) : ?>
+                    <?php $current_user = wp_get_current_user(); ?>
+                    <div class="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                        <a href="<?php echo esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>">
+                            <?php echo esc_html( strtoupper( substr( $current_user->display_name, 0, 1 ) ) ); ?>
+                        </a>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
     <div id="search-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 items-center justify-center">
