@@ -9,29 +9,6 @@ function jouvin_setup() {
     // Enable support for Post Thumbnails on posts and pages.
     add_theme_support( 'post-thumbnails' );
 
-    // This theme uses wp_nav_menu() in one location.
-    register_nav_menus( array(
-        'menu-1' => esc_html__( 'Primary', 'jouvin' ),
-    ) );
-
-    // Switch default core markup for search form, comment form, and comments to output valid HTML5.
-    add_theme_support( 'html5', array(
-        'search-form',
-        'comment-form',
-        'comment-list',
-        'gallery',
-        'caption',
-    ) );
-
-    // Set up the WordPress core custom background feature.
-    add_theme_support( 'custom-background', apply_filters( 'jouvin_custom_background_args', array(
-        'default-color' => 'ffffff',
-        'default-image' => '',
-    ) ) );
-
-    // Add theme support for selective refresh for widgets.
-    add_theme_support( 'customize-selective-refresh-widgets' );
-
     // Add support for core custom logo.
     add_theme_support( 'custom-logo', array(
         'height'      => 100,
@@ -43,6 +20,8 @@ function jouvin_setup() {
 add_action( 'after_setup_theme', 'jouvin_setup' );
 
 require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/inc/menu-functions.php';
+require get_template_directory() . '/inc/class-jouvin-walker-nav-menu.php';
 
 function jouvin_widgets_init() {
     register_sidebar( array(

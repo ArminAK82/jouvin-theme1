@@ -26,17 +26,36 @@
                 </div>
 
                 <!-- Search Bar -->
-                <div class="flex-1 max-w-lg mx-8">
+                <div class="flex-1 max-w-lg mx-8 hidden md:block">
                     <?php get_search_form(); ?>
                 </div>
 
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Main Navigation -->
+                <nav class="main-navigation" aria-label="<?php esc_attr_e( 'Primary menu', 'jouvin-theme' ); ?>">
+                    <?php
+                    wp_nav_menu(
+                        array(
+                            'theme_location' => 'primary',
+                            'menu_class'     => 'main-menu flex space-x-4',
+                            'container'      => false,
+                            'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                            'walker'         => new Jouvin_Walker_Nav_Menu(),
+                            'fallback_cb'    => 'wp_page_menu',
+                        )
+                    );
+                    ?>
+                </nav>
+
                 <!-- Navigation Icons -->
-                <div class="flex items-center space-x-6">
-                    <a href="<?php echo esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>" class="text-gray-600 hover:text-primary transition-colors relative">
-                        <i class="fas fa-heart text-lg"></i>
-                        <!-- You can make this dynamic with a wishlist plugin -->
-                        <span class="cart-count">0</span>
-                    </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    
                     <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="text-gray-600 hover:text-primary transition-colors relative">
                         <i class="fas fa-shopping-cart text-lg"></i>
                         <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
@@ -56,5 +75,26 @@
             </div>
         </div>
     </header>
+    <div id="mobile-menu" class="hidden md:hidden">
+        <div class="container mx-auto px-4 py-4">
+            <?php
+            wp_nav_menu(
+                array(
+                    'theme_location' => 'primary',
+                    'container'      => false,
+                    'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                )
+            );
+            ?>
+        </div>
+    </div>
+    <div id="search-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 items-center justify-center">
+        <div class="bg-white p-8 rounded-lg w-1/2">
+            <?php get_search_form(); ?>
+            <button id="close-search" class="absolute top-4 right-4 text-gray-600 hover:text-primary">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+    </div>
 <div id="page" class="site">
     <div id="content" class="site-content">

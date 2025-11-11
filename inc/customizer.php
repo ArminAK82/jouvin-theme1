@@ -208,6 +208,42 @@ function jouvin_customize_register( $wp_customize ) {
         'label'    => __( 'Heading Color', 'jouvin' ),
         'section'  => 'colors',
     ) ) );
+
+    // Menu Section
+    $wp_customize->add_section( 'menu_section', array(
+        'title'    => __( 'Menu', 'jouvin' ),
+        'panel'    => 'jouvin_options',
+    ) );
+
+    $wp_customize->add_setting( 'menu_text_color', array(
+        'default'   => '#333',
+        'transport' => 'refresh',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'menu_text_color', array(
+        'label'    => __( 'Menu Text Color', 'jouvin' ),
+        'section'  => 'menu_section',
+    ) ) );
+
+    $wp_customize->add_setting( 'menu_hover_color', array(
+        'default'   => '#007bff',
+        'transport' => 'refresh',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'menu_hover_color', array(
+        'label'    => __( 'Menu Hover Color', 'jouvin' ),
+        'section'  => 'menu_section',
+    ) ) );
+
+    $wp_customize->add_setting( 'submenu_background_color', array(
+        'default'   => '#ffffff',
+        'transport' => 'refresh',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'submenu_background_color', array(
+        'label'    => __( 'Sub-menu Background Color', 'jouvin' ),
+        'section'  => 'menu_section',
+    ) ) );
 }
 add_action( 'customize_register', 'jouvin_customize_register' );
 
@@ -273,6 +309,18 @@ function jouvin_get_customizer_css() {
     h1, h2, h3, h4, h5, h6 {
         color: <?php echo get_theme_mod( 'heading_color', '#6a0dad' ); ?>;
         font-family: var(--font-heading);
+    }
+
+    .main-navigation .main-menu a {
+        color: <?php echo get_theme_mod( 'menu_text_color', '#333' ); ?>;
+    }
+
+    .main-navigation .main-menu a:hover {
+        color: <?php echo get_theme_mod( 'menu_hover_color', '#007bff' ); ?>;
+    }
+
+    .main-navigation .sub-menu {
+        background-color: <?php echo get_theme_mod( 'submenu_background_color', '#ffffff' ); ?>;
     }
     <?php
     return ob_get_clean();
