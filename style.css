@@ -1,0 +1,261 @@
+/*
+Theme Name: Jouvin Theme
+Author: Gemini
+Description: A modern and dynamic e-commerce theme for selling clothes.
+Version: 1.0
+Requires at least: 5.0
+Tested up to: 6.4
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: jouvin
+Tags: e-commerce, responsive, modern, custom-background, custom-logo, post-formats, threaded-comments, translation-ready
+
+This theme is a modern and dynamic e-commerce theme designed for selling clothes, with a white, blue, and purple color scheme.
+*/
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Variables
+# Global
+# Header
+# Navigation
+# Content
+# Footer
+# WooCommerce
+# Responsive
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Variables
+--------------------------------------------------------------*/
+:root {
+    --color-primary: #6a0dad; /* Purple */
+    --color-secondary: #007bff; /* Blue */
+    --color-accent: #8a2be2; /* Blue Violet */
+    --color-text: #333;
+    --color-background: #fff;
+    --font-primary: 'Poppins', sans-serif;
+}
+
+/*--------------------------------------------------------------
+# Global
+--------------------------------------------------------------*/
+body {
+    font-family: var(--font-primary);
+    color: var(--color-text);
+    background-color: var(--color-background);
+    line-height: 1.6;
+    margin: 0;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+.site-header {
+    background-color: var(--color-background);
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-branding {
+    display: flex;
+    align-items: center;
+}
+
+.site-title a {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.custom-logo {
+    max-height: 50px;
+    width: auto;
+}
+
+/*--------------------------------------------------------------
+# Navigation
+--------------------------------------------------------------*/
+.main-navigation {
+    display: block;
+}
+
+.main-navigation ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+.main-navigation ul li {
+    margin-left: 25px;
+}
+
+.main-navigation ul li a {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    padding-bottom: 5px;
+    position: relative;
+}
+
+.main-navigation ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: width 0.3s ease;
+}
+
+.main-navigation ul li a:hover::after,
+.main-navigation ul li.current-menu-item a::after {
+    width: 100%;
+}
+
+/* Mobile Menu */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-primary);
+}
+
+
+/*--------------------------------------------------------------
+# Content
+--------------------------------------------------------------*/
+.site-content {
+    padding: 40px 0;
+}
+
+.content-area {
+    width: 100%;
+}
+
+.widget-area {
+    width: 25%;
+    padding-left: 30px;
+}
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+.site-footer {
+    background-color: #f9f9f9;
+    padding: 40px 0;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #555;
+}
+
+.site-footer a {
+    color: var(--color-primary);
+}
+
+/*--------------------------------------------------------------
+# WooCommerce
+--------------------------------------------------------------*/
+.woocommerce ul.products li.product .woocommerce-loop-product__title {
+    color: var(--color-primary);
+    font-size: 1.1rem;
+}
+
+.woocommerce ul.products li.product .price {
+    color: var(--color-secondary);
+    font-weight: 600;
+}
+
+.woocommerce a.button {
+    background-color: var(--color-primary);
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.woocommerce a.button:hover {
+    background-color: var(--color-accent);
+}
+
+.woocommerce span.onsale {
+    background-color: var(--color-secondary);
+}
+
+/*--------------------------------------------------------------
+# Responsive
+--------------------------------------------------------------*/
+@media (max-width: 768px) {
+    .site-header .container {
+        flex-wrap: wrap;
+    }
+
+    .menu-toggle {
+        display: block;
+        order: 2;
+    }
+
+    .main-navigation {
+        display: none;
+        width: 100%;
+        order: 3;
+        margin-top: 15px;
+    }
+
+    .main-navigation.toggled {
+        display: block;
+    }
+
+    .main-navigation ul {
+        flex-direction: column;
+    }
+
+    .main-navigation ul li {
+        margin: 10px 0;
+        text-align: center;
+    }
+}
